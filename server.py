@@ -1,3 +1,5 @@
+#!
+
 import BaseHTTPServer
 import cgi
 import glob
@@ -6,6 +8,7 @@ import mimetypes
 import os
 import os.path
 import urlparse
+import sys
 
 # Various config settings for the python server
 SETTINGS = {
@@ -23,12 +26,14 @@ SETTINGS = {
     }
 }
 
+currDir = os.path.dirname(sys.argv[0])
+
 # Override port if we are on a Heroku server
 if os.environ.get('PORT'):
     SETTINGS['port'] = int(os.environ.get('PORT'))
 
 # Get the current directory
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = '.' #os.path.dirname(os.path.abspath(currDir))
 if BASE_DIR[-1] != '/':
     BASE_DIR += '/'
 
